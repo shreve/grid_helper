@@ -2,6 +2,10 @@ require_relative 'grid/builder'
 require_relative 'grid/config'
 require_relative 'grid/dsl'
 
+if defined? Rails
+  require_relative 'grid/railtie'
+end
+
 module Grid
   def self.config
     @@config ||= Grid::Config.new
