@@ -2,6 +2,8 @@
 
 A (currently rails-only) dsl for css grids, just because.
 
+If you'd like to help, check out [the todo](https://github.com/shreve/grid_helper/blob/master/todo.md).
+
 grid helper can be used in erb templates.
 
 ```
