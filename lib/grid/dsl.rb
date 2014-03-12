@@ -1,19 +1,28 @@
 module Grid
   module DSL
-    def column(content=nil, options={}, &block)
-      klass = GridHelper.build_class(options)
-      klass << "columns"
-      content_tag(
-        (options[:tag] || :div),
-        (content || options[:content] || capture("".html_safe, &block)),
-        class: klass)
+    def column(options = {}, content = nil, &block)
+      Grid::Builder::column(options, content, &block)
     end
 
-    def row(options={}, &block)
-      klass = "row"
-      klass << GridHelper.build_class(options)
-      content_tag(:div, capture("".html_safe, &block), class: klass)
+    def row(options = {}, &block)
+      Grid::Builder.row(options, &block)
     end
+
+
+    # klass = Grid::Builder.build_class(options)
+    # klass << "columns"
+    # content_tag(
+    #   (options[:tag] || :div),
+    #   (content || options[:content] || capture("".html_safe, &block)),
+    #   class: klass)
+    # end
+
+
+    # def row(options={}, &block)
+    #   klass = "row"
+    #   klass << Grid.build_class(options)
+    #   content_tag(:div, capture("".html_safe, &block), class: klass)
+    # end
 
     {
       one: 1,
@@ -29,14 +38,13 @@ module Grid
       eleven: 11,
       twelve: 12
     }.each do |w,n|
-      method_name = "#{n}_columns"
+      method_name = "#{w}_columns"
       method_name.sub('s','') if n == 1
-      define_method(method_name) do |content=nil, options={}, &block|
-        options = Hash.new(n).merge(options)
-        column(content, options, &block)
+      define_method(method_name) do |options = {}, content = nil, &block|
+        options = Grid::Builder.default_sizes(n).merge(options)
+        column(options, content, &block)
       end
       alias_method "#{w}_block".to_sym, method_name
     end
-
   end
 end

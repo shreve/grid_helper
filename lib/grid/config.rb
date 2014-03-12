@@ -1,4 +1,14 @@
 module Grid
+  def self.configure(&block)
+    block.call config
+  end
+
+  def self.config
+    @@config ||= Grid::Config.new
+  end
+end
+
+module Grid
   class Config
     attr_accessor :data
 
@@ -18,9 +28,14 @@ module Grid
             small: 'col-sm-',
             xsmall: 'col-xs-'
           }
-        }
+        },
+        hidden_attributes: [:small, :medium, :large, :xlarge, :xxlarge]
       }
       merge(options)
+    end
+
+    def class_names
+      data[:class_names][data[:grid_system]]
     end
 
     def method_missing(method, *args, &block)

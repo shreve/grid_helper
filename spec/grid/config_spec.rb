@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe GridHelper::Config do
+describe Grid::Config do
   before do
-    @config = GridHelper::Config.new
+    @config = Grid::Config.new
   end
 
   it "can be passed initialization options" do
-    config = GridHelper::Config.new({ option: :value })
+    config = Grid::Config.new({ option: :value })
     config.option.must_equal :value
   end
 
