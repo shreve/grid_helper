@@ -1,6 +1,10 @@
-# Grid Helper
+Grid Helper
+===========
 
 A (currently rails-only) dsl for css grids, just because.
+
+[![Gem Version](https://badge.fury.io/rb/grid_helper.png)](http://badge.fury.io/rb/grid_helper)
+[![Code Climate](https://codeclimate.com/github/shreve/grid_helper.png)](https://codeclimate.com/github/shreve/grid_helper)
 
 If you'd like to help, check out [the todo](https://github.com/shreve/grid_helper/blob/master/todo.md).
 
